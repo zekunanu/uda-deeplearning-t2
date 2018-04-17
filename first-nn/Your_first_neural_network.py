@@ -133,7 +133,7 @@ val_features, val_targets = features[-60*24:], targets[-60*24:]
 # 
 #   
 
-# In[59]:
+# In[9]:
 
 
 activation_function = lambda x :1/(1+np.exp(-x))
@@ -141,7 +141,7 @@ activation_function(1)
 1/(1+np.exp(-1))
 
 
-# In[101]:
+# In[10]:
 
 
 class NeuralNetwork(object):
@@ -255,7 +255,7 @@ def MSE(y, Y):
 # 
 # 运行这些单元测试，检查你的网络实现是否正确。这样可以帮助你确保网络已正确实现，然后再开始训练网络。这些测试必须成功才能通过此项目。
 
-# In[103]:
+# In[12]:
 
 
 import unittest
@@ -338,15 +338,15 @@ unittest.TextTestRunner().run(suite)
 # 
 # 隐藏节点越多，模型的预测结果就越准确。尝试不同的隐藏节点的数量，看看对性能有何影响。你可以查看损失字典，寻找网络性能指标。如果隐藏单元的数量太少，那么模型就没有足够的空间进行学习，如果太多，则学习方向就有太多的选择。选择隐藏单元数量的技巧在于找到合适的平衡点。
 
-# In[153]:
+# In[35]:
 
 
 import sys
 
 ### Set the hyperparameters here ###
-iterations = 600
-learning_rate = 0.5
-hidden_nodes = 4
+iterations = 6000
+learning_rate = 0.4
+hidden_nodes = 12
 output_nodes = 1
 
 N_i = train_features.shape[1]
@@ -370,7 +370,7 @@ for ii in range(iterations):
     losses['validation'].append(val_loss)
 
 
-# In[154]:
+# In[36]:
 
 
 plt.plot(losses['train'], label='Training loss')
@@ -383,7 +383,17 @@ _ = plt.ylim()
 # 
 # 使用测试数据看看网络对数据建模的效果如何。如果完全错了，请确保网络中的每步都正确实现。
 
-# In[155]:
+# ## 可选：思考下你的结果（我们不会评估这道题的答案）
+# 
+#  
+# 请针对你的结果回答以下问题。模型对数据的预测效果如何？哪里出现问题了？为何出现问题呢？
+# 
+# > **注意**：你可以通过双击该单元编辑文本。如果想要预览文本，请按 Control + Enter
+# 
+# #### 请将你的答案填写在下方
+# 
+
+# In[37]:
 
 
 fig, ax = plt.subplots(figsize=(8,4))
@@ -400,13 +410,3 @@ dates = dates.apply(lambda d: d.strftime('%b %d'))
 ax.set_xticks(np.arange(len(dates))[12::24])
 _ = ax.set_xticklabels(dates[12::24], rotation=45)
 
-
-# ## 可选：思考下你的结果（我们不会评估这道题的答案）
-# 
-#  
-# 请针对你的结果回答以下问题。模型对数据的预测效果如何？哪里出现问题了？为何出现问题呢？
-# 
-# > **注意**：你可以通过双击该单元编辑文本。如果想要预览文本，请按 Control + Enter
-# 
-# #### 请将你的答案填写在下方
-# 
